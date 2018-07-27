@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import classes from './BurgerIngredient.css';
 
+import {INGREDIENT} from '../../../Constants/Constants';
+
 const burgerIngredient = (props) => {
     let ingredient = null;
 
@@ -19,16 +21,16 @@ const burgerIngredient = (props) => {
                 </div>
             );
             break;
-        case ('meat'):
+        case (INGREDIENT.SALAD):
             ingredient = <div className={classes.Meat}></div>;
             break;
-        case ('cheese'):
+        case (INGREDIENT.CHEESE):
             ingredient = <div className={classes.Cheese}></div>;
             break;
-        case ('salad'):
+        case (INGREDIENT.MEAT):
             ingredient = <div className={classes.Salad}></div>;
             break;
-        case ('bacon'):
+        case (INGREDIENT.BACON):
             ingredient = <div className={classes.Bacon}></div>;
             break;
         default:

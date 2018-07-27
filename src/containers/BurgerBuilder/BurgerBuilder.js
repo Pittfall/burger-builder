@@ -1,24 +1,19 @@
 import React, { Component, Fragment } from 'react';
 
+import classes from './BurgerBuilder.css'
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
-
-const INGREDIENT_PRICES = {
-    salad: 0.5,
-    cheese: 0.4,
-    meat: 1.3,
-    bacon: 1
-}
+import {INGREDIENT, INGREDIENT_PRICE, BASE_BURGER_PRICE} from '../../Constants/Constants'
 
 class BurgerBuilder extends Component {
     state = {
         ingredients: {
-            salad: 0,
-            bacon: 0,
-            cheese: 0,
-            meat: 0
+            [INGREDIENT.SALAD]: 0,
+            [INGREDIENT.MEAT]: 0,
+            [INGREDIENT.CHEESE]: 0,
+            [INGREDIENT.BACON]: 0
         },
-        totalPrice: 4
+        totalPrice: BASE_BURGER_PRICE
     }
 
     addIngredientHandler = (type) => {
@@ -27,8 +22,8 @@ class BurgerBuilder extends Component {
         };
         updatedIngredients[type]++;
 
-        let newPrice = this.totalPrice;
-        newPrice += INGREDIENT_PRICES[type];
+        let newPrice = this.state.totalPrice;
+        newPrice += INGREDIENT_PRICE[type];
 
         this.setState({totalPrice: newPrice, ingredients: updatedIngredients});
     }
@@ -43,8 +38,8 @@ class BurgerBuilder extends Component {
             return;
         }
 
-        let newPrice = this.totalPrice;
-        newPrice -= INGREDIENT_PRICES[type];
+        let newPrice = this.state.totalPrice;
+        newPrice -= INGREDIENT_PRICE[type];
 
         this.setState({totalPrice: newPrice, ingredients: updatedIngredients});
     }
@@ -60,6 +55,7 @@ class BurgerBuilder extends Component {
         return (
             <Fragment>
                 <Burger ingredients={this.state.ingredients} />
+                <p className={classes.Price}>Current Price: ${this.state.totalPrice.toFixed(2)}</p>
                 <BuildControls ingredientAdded={this.addIngredientHandler} 
                 ingredientRemoved={this.removeIngredientHandler} disabled={disabledInfo}/>
             </Fragment>
