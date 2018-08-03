@@ -4,6 +4,8 @@ import classes from './BurgerBuilder.css'
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 import {INGREDIENT, INGREDIENT_PRICE, BASE_BURGER_PRICE} from '../../Constants/Constants'
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 class BurgerBuilder extends Component {
     state = {
@@ -68,6 +70,9 @@ class BurgerBuilder extends Component {
 
         return (
             <Fragment>
+                <Modal>
+                    <OrderSummary ingredients={this.state.ingredients} />
+                </Modal>
                 <Burger ingredients={this.state.ingredients} />
                 <p className={classes.Price}>Current Price: ${this.state.totalPrice.toFixed(2)}</p>
                 <BuildControls 
