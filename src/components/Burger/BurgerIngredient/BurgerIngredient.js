@@ -22,13 +22,13 @@ const burgerIngredient = (props) => {
             );
             break;
         case (INGREDIENT.SALAD):
-            ingredient = <div className={classes.Meat}></div>;
+            ingredient = <div className={classes.Salad}></div>;
             break;
         case (INGREDIENT.CHEESE):
             ingredient = <div className={classes.Cheese}></div>;
             break;
         case (INGREDIENT.MEAT):
-            ingredient = <div className={classes.Salad}></div>;
+            ingredient = <div className={classes.Meat}></div>;
             break;
         case (INGREDIENT.BACON):
             ingredient = <div className={classes.Bacon}></div>;
