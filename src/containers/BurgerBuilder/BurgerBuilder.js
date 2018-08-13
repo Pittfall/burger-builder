@@ -61,7 +61,7 @@ class BurgerBuilder extends Component {
         this.setState({purchasable: sum > 0});
     }
 
-    purchaseHandler = () => {
+    purchaseHandler () {
         this.setState({purchasing: true});
     }
 
@@ -97,7 +97,7 @@ class BurgerBuilder extends Component {
                         ingredientRemoved={this.removeIngredientHandler} 
                         disabled={disabledInfo}
                         purchasable={this.state.purchasable}
-                        order={this.purchaseHandler} />
+                        order={this.purchaseHandler.bind(this)} />
             </Fragment>
 
         );
