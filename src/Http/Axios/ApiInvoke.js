@@ -29,7 +29,7 @@ export const patch = (path, data) => {
     return new Promise((resolve, reject) => {
       axios.patch(path, data)
         .then(response => { resolve(response) })
-        .catch(error => { reject(handleError(error)) });
+        .catch(error => { reject(HandleError(error)) });
     });
   };
 

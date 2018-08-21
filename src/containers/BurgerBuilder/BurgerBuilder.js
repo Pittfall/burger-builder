@@ -6,6 +6,7 @@ import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 import {INGREDIENT, INGREDIENT_PRICE, BASE_BURGER_PRICE} from '../../Constants/Constants'
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import { SaveOrder } from '../../Http/API/API';
 
 class BurgerBuilder extends Component {
     state = {
@@ -70,7 +71,20 @@ class BurgerBuilder extends Component {
     }
 
     puchaseContinue = () => {
-        alert('You Continue!');
+        const order = {
+            ingredients: this.state.ingredients,
+            price: this.state.totalPrice, // Typically this is calculated on the server.
+            customer: {
+                name: "Andrew",
+                age: 30,
+                email: "Andrew@Rusu.com",
+            },
+            deliverMethod: "Fast"
+        }
+
+        SaveOrder(order)
+            .then(response => console.log(response))
+            .catch(error => console.log(error));
     }
 
     render () {
