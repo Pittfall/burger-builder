@@ -4,23 +4,15 @@ import classes from './Burger.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient'
 
 const burger = (props) => {
-    const ingredientNames = Object.keys(props.ingredients);
-
-    // Create an array with each ingredient 
-    const transformedIngredients = ingredientNames.map(ingredientKey => {
-        // Get an array of array of ingredients.  Example if salad has 2, it will create an array with 2 elements.
-        return [...Array(props.ingredients[ingredientKey])].map((_, i) => {
-            return <BurgerIngredient key={ingredientKey + i} type={ingredientKey} />
-        });
+    // Create an array with each ingredient
+    let finalIngredients = [];
+    Object.keys(props.ingredients).forEach(ingredientKey => {
+        for (let i = 0; i < props.ingredients[ingredientKey].quantity; ++i) {
+            finalIngredients.push(<BurgerIngredient key={ingredientKey + i} type={ingredientKey} />);
+        }
     });
-
-    // Get rid of ingredients that have no count.
-    let finalIngredients = transformedIngredients.reduce((newArray, el) => {
-        return newArray.concat(el);
-    }, []);
-
-    if (finalIngredients.length === 0)
-    {
+    
+    if (finalIngredients.length === 0) {
         finalIngredients = <p>Please start adding ingredients!</p>;
     }
 

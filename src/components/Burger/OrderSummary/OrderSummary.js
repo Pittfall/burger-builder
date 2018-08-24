@@ -1,13 +1,12 @@
 import React, { Fragment } from 'react';
 
-import {INGREDIENT_NAMES} from '../../../Constants/Constants';
 import Button from '../../UI/Button/Button';
 
 const orderSummary = (props) => {
     const ingredientSummary =  Object.keys(props.ingredients).map(igkey => {
         return (
             <li key={igkey}>
-                {INGREDIENT_NAMES[igkey]}: {props.ingredients[igkey]}
+                {props.ingredients[igkey].name}: {props.ingredients[igkey].quantity}
             </li>
         );
     });

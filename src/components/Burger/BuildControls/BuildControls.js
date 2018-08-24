@@ -2,14 +2,13 @@ import React from 'react';
 
 import classes from './BuildControls.css';
 import BuildControl from './BuildControl/BuildControl';
-import {INGREDIENT_NAMES} from '../../../Constants/Constants'
 
 const buildControls = (props) => (
     <div className={classes.BuildControls}>
-        {Object.keys(INGREDIENT_NAMES).map(key => {
+        {Object.keys(props.ingredients).map(key => {
             return <BuildControl 
                         key={key} 
-                        ingredient={INGREDIENT_NAMES[key]} 
+                        ingredient={props.ingredients[key].name} 
                         added={() => props.ingredientAdded(key)} 
                         removed={() => props.ingredientRemoved(key)}
                         disable={props.disabled[key]}  />

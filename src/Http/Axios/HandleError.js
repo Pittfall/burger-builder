@@ -1,5 +1,4 @@
 const handleError = (error) => {
-
     const { status, message } = error;
 
     switch (status) {
