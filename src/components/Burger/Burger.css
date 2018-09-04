@@ -4,22 +4,20 @@
     text-align: center;
     font-weight: bold;
     font-size: 1.2rem;
-    height: 1000px;
-    max-height: inherit;
+    height: 600px;
+    max-height: 100%;
     width: 100%;
 }
 
 @media (min-width: 500px) and (min-height: 400px) {
     .Burger {
         max-width: 350px;
-        max-height: 300px;
     }
 }
 
 @media (min-width: 500px) and (min-height: 401px) {
     .Burger {
         max-width: 450px;
-        max-height: 400px;
     }
 }
 
