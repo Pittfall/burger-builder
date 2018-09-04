@@ -84,32 +84,39 @@ class BurgerBuilder extends Component {
     }
 
     puchaseContinue = () => {
-        this.setState({loading: true});
+        const checkoutIngredients = [];
 
-        const ingredientWithQuantity = Object.keys(this.state.ingredients).reduce((obj, key) => {
-            obj[key] = this.state.ingredients[key].quantity;
-            return obj;
-        }, {});
-
-        const order = {
-            ingredients: ingredientWithQuantity,
-            price: this.state.totalPrice, // Typically this is calculated on the server.
-            customer: {
-                name: "Andrew",
-                age: 30,
-                email: "Andrew@Rusu.com",
-            },
-            deliverMethod: "Fast"
+        for (var i in this.state.ingredients) {
+            checkoutIngredients.push(i + '=' + this.state.ingredients[i].quantity);
         }
 
-        SaveOrder(order)
-            .then(response => {
-                this.setState({loading: false, purchasing: false});
-            })
-            .catch(error => {
-                this.setState({loading: false, purchasing: false});
-                alert(error); // Temporary alert.
-            });
+        this.props.history.push({ pathname: '/checkout', search: checkoutIngredients.join("&") });
+        // this.setState({loading: true});
+
+        // const ingredientWithQuantity = Object.keys(this.state.ingredients).reduce((obj, key) => {
+        //     obj[key] = this.state.ingredients[key].quantity;
+        //     return obj;
+        // }, {});
+
+        // const order = {
+        //     ingredients: ingredientWithQuantity,
+        //     price: this.state.totalPrice, // Typically this is calculated on the server.
+        //     customer: {
+        //         name: "Andrew",
+        //         age: 30,
+        //         email: "Andrew@Rusu.com",
+        //     },
+        //     deliverMethod: "Fast"
+        // }
+
+        // SaveOrder(order)
+        //     .then(response => {
+        //         this.setState({loading: false, purchasing: false});
+        //     })
+        //     .catch(error => {
+        //         this.setState({loading: false, purchasing: false});
+        //         alert(error); // Temporary alert.
+        //     });
     }
 
     render () {
