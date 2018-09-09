@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
+import ContactData from './ContactData/ContactData';
 
 class Checkout extends Component {
     state = {
@@ -35,7 +37,6 @@ class Checkout extends Component {
         const localIngredients = this.state.ingredients;
 
         for (const param of params) {
-            const ing = localIngredients[param[0]];
             localIngredients[param[0]].quantity = +param[1];
         }
 
@@ -43,7 +44,7 @@ class Checkout extends Component {
     }
 
     continueHandler = () => {
-
+      this.props.history.push({pathname: this.props.match.path +  "/contact-data"});
     }
 
     cancelHandler = () => {
@@ -54,6 +55,8 @@ class Checkout extends Component {
         return (
             <div>
                 <CheckoutSummary ingredients={this.state.ingredients} continue={this.continueHandler} cancel={this.cancelHandler} />
+                <Route path={this.props.match.path + "/contact-data"} 
+                        render={(props) => (<ContactData ingredients={this.state.ingredients} {...props} />)} />
             </div>
         );
     }

@@ -7,7 +7,7 @@ import {BASE_BURGER_PRICE} from '../../Constants/Constants'
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import { SaveOrder, GetIngredients } from '../../Http/API/API';
+import { GetIngredients } from '../../Http/API/API';
 
 class BurgerBuilder extends Component {
     state = {
@@ -51,11 +51,12 @@ class BurgerBuilder extends Component {
         const updatedIngredients = {
             ...this.state.ingredients
         };
-        updatedIngredients[type].quantity--;
 
-        if (updatedIngredients[type].quantity < 0) {
-            return;
+        if (updatedIngredients[type].quantity <= 0) {
+          return;
         }
+
+        updatedIngredients[type].quantity--;
 
         let newPrice = this.state.totalPrice;
         newPrice -= this.state.ingredients[type].price;
@@ -91,32 +92,6 @@ class BurgerBuilder extends Component {
         }
 
         this.props.history.push({ pathname: '/checkout', search: checkoutIngredients.join("&") });
-        // this.setState({loading: true});
-
-        // const ingredientWithQuantity = Object.keys(this.state.ingredients).reduce((obj, key) => {
-        //     obj[key] = this.state.ingredients[key].quantity;
-        //     return obj;
-        // }, {});
-
-        // const order = {
-        //     ingredients: ingredientWithQuantity,
-        //     price: this.state.totalPrice, // Typically this is calculated on the server.
-        //     customer: {
-        //         name: "Andrew",
-        //         age: 30,
-        //         email: "Andrew@Rusu.com",
-        //     },
-        //     deliverMethod: "Fast"
-        // }
-
-        // SaveOrder(order)
-        //     .then(response => {
-        //         this.setState({loading: false, purchasing: false});
-        //     })
-        //     .catch(error => {
-        //         this.setState({loading: false, purchasing: false});
-        //         alert(error); // Temporary alert.
-        //     });
     }
 
     render () {
