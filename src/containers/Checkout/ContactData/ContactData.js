@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { BASE_BURGER_PRICE } from '../../../Constants/Constants';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Button from '../../../components/UI/Button/Button';
+import Input from '../../../components/UI/Input/Input';
 import classes from './ContactData.css';
 import { SaveOrder } from '../../../Http/API/API';
 
@@ -57,10 +58,10 @@ class ContactData extends Component {
   render () {
     let form = (
       <form>
-        <input type="text" name="name" placeholder="Your Name" />
-        <input type="email" name="email" placeholder="Your Email" />
-        <input type="text" name="street" placeholder="Street" />
-        <input type="text" name="postal" placeholder="Postal Code" />
+        <Input inputtype='input' type='text' name='name' placeholder="Your Name" />
+        <Input inputtype='input' type='email' name='email' placeholder="Your Email" />
+        <Input inputtype='input' type='text' name='street' placeholder="Street" />
+        <Input inputtype='input' type='text' name='postal' placeholder="Postal Code" />
         <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
       </form>
     );
@@ -72,7 +73,7 @@ class ContactData extends Component {
     return (
       <div className={classes.ContactData}>
         <h4>Please enter your contact info!</h4>
-        {form};
+        {form}
       </div>
     );
   }
