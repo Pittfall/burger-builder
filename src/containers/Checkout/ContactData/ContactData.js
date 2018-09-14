@@ -8,15 +8,37 @@ import classes from './ContactData.css';
 import { SaveOrder } from '../../../Http/API/API';
 
 class ContactData extends Component {
+  getElement = (elemType, type, placeHolder) => {
+    return {
+      elementType: elemType,
+      elementConfig: {
+        type: type,
+        placeholder: placeHolder
+      },
+      value: ''
+    }
+  }
+
   state = {
-    name: "",
-    email: "",
-    address: {
-      street: "",
-      postalCode: ""
+    orderForm: {
+      name: this.getElement('input', 'text', 'Your Name'),
+      street: this.getElement('input', 'text', 'Street'),
+      postal: this.getElement('input', 'text', 'Postal Code'),
+      country: this.getElement('input', 'text', 'Country'),
+      email: this.getElement('input', 'email', 'Your Email'),
+      deliverMethod: {
+        elementType: 'select',
+        elementConfig: {
+          options: [
+            {value: 'fastest', displayValue: 'Fastest'},
+            {value: 'cheapest', displayValue: 'Cheapest'}
+          ],
+          value: ''
+        }
+      }
     },
     loading: false
-  }
+  }  
 
   orderHandler = (event) => {
     event.preventDefault();
@@ -56,12 +78,20 @@ class ContactData extends Component {
   }
 
   render () {
+    const formElements = Object.keys(this.state.orderForm).map(key => {
+      const element = this.state.orderForm[key];
+
+      return (
+        <Input key={key}
+          elementType={element.elementType} 
+          elementConfig={element.elementConfig}
+          value={element.value} />
+      )
+    });
+
     let form = (
       <form>
-        <Input inputtype='input' type='text' name='name' placeholder="Your Name" />
-        <Input inputtype='input' type='email' name='email' placeholder="Your Email" />
-        <Input inputtype='input' type='text' name='street' placeholder="Street" />
-        <Input inputtype='input' type='text' name='postal' placeholder="Postal Code" />
+        {formElements}
         <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
       </form>
     );
