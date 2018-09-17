@@ -54,16 +54,7 @@ class ContactData extends Component {
     const order = {
         ingredients: this.props.ingredients,
         price: totalPrice, // Typically this is calculated on the server.
-        customer: {
-            name: this.state.name,
-            age: this.state.age,
-            email: this.state.email,
-            address: {
-              street: this.state.address.street,
-              postalCode: this.state.address.postalCode
-            }
-        },
-        deliverMethod: "Fast"
+        customer: this.state.orderForm,
     }
 
     SaveOrder(order)
@@ -77,6 +68,13 @@ class ContactData extends Component {
         });
   }
 
+  inputChangedHandler = (event, inputIdentifier) => {
+    const orderFormCurrent = this.state.orderForm;
+    orderFormCurrent[inputIdentifier].value = event.target.value;
+
+    this.setState({orderForm: orderFormCurrent});
+  }
+
   render () {
     const formElements = Object.keys(this.state.orderForm).map(key => {
       const element = this.state.orderForm[key];
@@ -85,7 +83,8 @@ class ContactData extends Component {
         <Input key={key}
           elementType={element.elementType} 
           elementConfig={element.elementConfig}
-          value={element.value} />
+          value={element.value}
+          changed={(event) => this.inputChangedHandler(event, key)} />
       )
     });
 
