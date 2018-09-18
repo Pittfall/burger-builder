@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import { FIELDS } from './Fields';
 import { BASE_BURGER_PRICE } from '../../../Constants/Constants';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Button from '../../../components/UI/Button/Button';
@@ -8,35 +9,8 @@ import classes from './ContactData.css';
 import { SaveOrder } from '../../../Http/API/API';
 
 class ContactData extends Component {
-  getElement = (elemType, type, placeHolder) => {
-    return {
-      elementType: elemType,
-      elementConfig: {
-        type: type,
-        placeholder: placeHolder
-      },
-      value: ''
-    }
-  }
-
   state = {
-    orderForm: {
-      name: this.getElement('input', 'text', 'Your Name'),
-      street: this.getElement('input', 'text', 'Street'),
-      postal: this.getElement('input', 'text', 'Postal Code'),
-      country: this.getElement('input', 'text', 'Country'),
-      email: this.getElement('input', 'email', 'Your Email'),
-      deliverMethod: {
-        elementType: 'select',
-        elementConfig: {
-          options: [
-            {value: 'fastest', displayValue: 'Fastest'},
-            {value: 'cheapest', displayValue: 'Cheapest'}
-          ],
-          value: ''
-        }
-      }
-    },
+    orderForm: FIELDS,
     loading: false
   }  
 
@@ -45,16 +19,20 @@ class ContactData extends Component {
     
     this.setState({loading: true});
 
-
     const totalPrice = Object.keys(this.props.ingredients).reduce((sum, key) => {
       const priceForIngredient = this.props.ingredients[key].price * this.props.ingredients[key].quantity;
       return sum + priceForIngredient;
     }, BASE_BURGER_PRICE);
 
+    const formData = {};
+    for (let formIdentifier in this.state.orderForm) {
+      formData[formIdentifier] = this.state.orderForm[formIdentifier].value;
+    }
+
     const order = {
         ingredients: this.props.ingredients,
         price: totalPrice, // Typically this is calculated on the server.
-        customer: this.state.orderForm,
+        orderData: formData,
     }
 
     SaveOrder(order)
@@ -71,8 +49,28 @@ class ContactData extends Component {
   inputChangedHandler = (event, inputIdentifier) => {
     const orderFormCurrent = this.state.orderForm;
     orderFormCurrent[inputIdentifier].value = event.target.value;
+    orderFormCurrent[inputIdentifier].valid = this.checkValidity(orderFormCurrent[inputIdentifier].value,
+      orderFormCurrent[inputIdentifier].validation);
 
     this.setState({orderForm: orderFormCurrent});
+  }
+  
+  checkValidity = (value, rules) => {
+    let isValid = true;
+
+    if (rules.required) {
+      isValid = value.trim() !== '' && isValid;  
+    }
+
+    if (rules.minLength) {
+      isValid = value.length >= rules.minLength && isValid;
+    }
+
+    if (rules.maxLength) {
+      isValid = value.length <= rules.maxLength && isValid;
+    }
+
+    return isValid;
   }
 
   render () {
@@ -89,9 +87,9 @@ class ContactData extends Component {
     });
 
     let form = (
-      <form>
+      <form onSubmit={this.orderHandler}>
         {formElements}
-        <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
+        <Button btnType="Success">ORDER</Button>
       </form>
     );
 
