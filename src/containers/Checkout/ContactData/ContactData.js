@@ -11,7 +11,8 @@ import { SaveOrder } from '../../../Http/API/API';
 class ContactData extends Component {
   state = {
     orderForm: FIELDS,
-    loading: false
+    loading: false,
+    formIsValid: false
   }  
 
   orderHandler = (event) => {
@@ -51,12 +52,25 @@ class ContactData extends Component {
     orderFormCurrent[inputIdentifier].value = event.target.value;
     orderFormCurrent[inputIdentifier].valid = this.checkValidity(orderFormCurrent[inputIdentifier].value,
       orderFormCurrent[inputIdentifier].validation);
+    orderFormCurrent[inputIdentifier].touched = true;
 
-    this.setState({orderForm: orderFormCurrent});
+    let formIsValid = true;
+    for (let i in orderFormCurrent) {
+      if (!orderFormCurrent[i].valid) {
+        formIsValid = false;
+        break;
+      }
+    }
+
+    this.setState({orderForm: orderFormCurrent, formIsValid: formIsValid});
   }
   
   checkValidity = (value, rules) => {
     let isValid = true;
+
+    if (!rules) {
+      return true;
+    }
 
     if (rules.required) {
       isValid = value.trim() !== '' && isValid;  
@@ -82,6 +96,8 @@ class ContactData extends Component {
           elementType={element.elementType} 
           elementConfig={element.elementConfig}
           value={element.value}
+          invalid={!element.valid}
+          touched={element.touched}
           changed={(event) => this.inputChangedHandler(event, key)} />
       )
     });
@@ -89,7 +105,7 @@ class ContactData extends Component {
     let form = (
       <form onSubmit={this.orderHandler}>
         {formElements}
-        <Button btnType="Success">ORDER</Button>
+        <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER</Button>
       </form>
     );
 

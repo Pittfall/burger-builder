@@ -7,9 +7,10 @@ export const FIELDS = Object.freeze({
         },
         value: '',
         validation: {
-            required: false
+            required: true
         },
-        valid: false
+        valid: false,
+        touched: false
     },
     street: {
         elementType: 'input',
@@ -19,9 +20,10 @@ export const FIELDS = Object.freeze({
         },
         value: '',
         validation: {
-            required: false
+            required: true
         },
-        valid: false
+        valid: false,
+        touched: false
     },
     postal: {
         elementType: 'input',
@@ -31,11 +33,12 @@ export const FIELDS = Object.freeze({
         },
         value: '',
         validation: {
-            required: false,
-            minLenght: 6,
+            required: true,
+            minLength: 6,
             maxLength: 6
         },
-        valid: false
+        valid: false,
+        touched: false
     },
     country: {
         elementType: 'input',
@@ -45,9 +48,10 @@ export const FIELDS = Object.freeze({
         },
         value: '',
         validation: {
-            required: false
+            required: true
         },
-        valid: false
+        valid: false,
+        touched: false
     },
     email: {
         elementType: 'input',
@@ -57,9 +61,10 @@ export const FIELDS = Object.freeze({
         },
         value: '',
         validation: {
-            required: false
+            required: true
         },
-        valid: false
+        valid: false,
+        touched: false
     },
     deliverMethod: {
         elementType: 'select',
@@ -69,6 +74,7 @@ export const FIELDS = Object.freeze({
                 { value: 'cheapest', displayValue: 'Cheapest' }
             ]
         },
+        value: 'fastest',
         validation: {},
         valid: true
     }
