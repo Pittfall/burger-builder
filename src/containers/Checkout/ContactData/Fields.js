@@ -2,7 +2,7 @@ export const FIELDS = Object.freeze({
     name: {
         elementType: 'input',
         elementConfig: {
-            type: 'text', 
+            type: 'text',
             placeholder: 'Your Name'
         },
         value: '',
@@ -14,7 +14,7 @@ export const FIELDS = Object.freeze({
     street: {
         elementType: 'input',
         elementConfig: {
-            type: 'text', 
+            type: 'text',
             placeholder: 'Street'
         },
         value: '',
@@ -26,7 +26,7 @@ export const FIELDS = Object.freeze({
     postal: {
         elementType: 'input',
         elementConfig: {
-            type: 'text', 
+            type: 'text',
             placeholder: 'Postal Code'
         },
         value: '',
@@ -40,7 +40,7 @@ export const FIELDS = Object.freeze({
     country: {
         elementType: 'input',
         elementConfig: {
-            type: 'text', 
+            type: 'text',
             placeholder: 'Country'
         },
         value: '',
@@ -52,7 +52,7 @@ export const FIELDS = Object.freeze({
     email: {
         elementType: 'input',
         elementConfig: {
-            type: 'email', 
+            type: 'email',
             placeholder: 'Email'
         },
         value: '',
@@ -64,9 +64,9 @@ export const FIELDS = Object.freeze({
     deliverMethod: {
         elementType: 'select',
         elementConfig: {
-            options:  [ 
-                {value: 'fastest', displayValue: 'Fastest'}, 
-                {value: 'cheapest', displayValue: 'Cheapest'}
+            options: [
+                { value: 'fastest', displayValue: 'Fastest' },
+                { value: 'cheapest', displayValue: 'Cheapest' }
             ]
         },
         validation: {},
