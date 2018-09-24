@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { FIELDS } from './Fields';
-import { BASE_BURGER_PRICE } from '../../../Constants/Constants';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
@@ -20,11 +20,6 @@ class ContactData extends Component {
     
     this.setState({loading: true});
 
-    const totalPrice = Object.keys(this.props.ingredients).reduce((sum, key) => {
-      const priceForIngredient = this.props.ingredients[key].price * this.props.ingredients[key].quantity;
-      return sum + priceForIngredient;
-    }, BASE_BURGER_PRICE);
-
     const formData = {};
     for (let formIdentifier in this.state.orderForm) {
       formData[formIdentifier] = this.state.orderForm[formIdentifier].value;
@@ -32,7 +27,7 @@ class ContactData extends Component {
 
     const order = {
         ingredients: this.props.ingredients,
-        price: totalPrice, // Typically this is calculated on the server.
+        price: this.props.price,
         orderData: formData,
     }
 
@@ -122,4 +117,11 @@ class ContactData extends Component {
   }
 }
 
-export default ContactData;
+const mapStateToProps = state => {
+  return {
+      ingredients: state.ingredients,
+      price: state.totalPrice
+  }
+}
+
+export default connect(mapStateToProps)(ContactData);
