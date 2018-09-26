@@ -8,7 +8,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 // import { GetIngredients } from '../../Http/API/API';
-import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '../../store/actions';
+import { addIngredient, removeIngredient } from '../../store/actions/burgerBuilder';
 
 class BurgerBuilder extends Component {
     state = {
@@ -113,8 +113,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddIngredientHandler: (ingredient) => dispatch({type: ADD_INGREDIENT, ingredient: ingredient}),
-        onRemoveIngredientHandler: (ingredient) => dispatch({type: REMOVE_INGREDIENT, ingredient: ingredient})
+        onAddIngredientHandler: (ingredient) => dispatch(addIngredient(ingredient)),
+        onRemoveIngredientHandler: (ingredient) => dispatch(removeIngredient(ingredient))
     }
 }
 

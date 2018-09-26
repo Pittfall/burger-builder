@@ -1,5 +1,5 @@
-import { ADD_INGREDIENT, REMOVE_INGREDIENT } from './actions';
-import { BASE_BURGER_PRICE } from '../Constants/Constants'
+import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '../actions/actionTypes';
+import { BASE_BURGER_PRICE } from '../../Constants/Constants'
 
 const initialState = {
   // Temporarily keep it local until learning how to load it asynchronous from our database.
