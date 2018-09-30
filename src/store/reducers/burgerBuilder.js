@@ -1,36 +1,27 @@
-import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '../actions/actionTypes';
+import * as actionTypes from '../actions/actionTypes';
 import { BASE_BURGER_PRICE } from '../../Constants/Constants'
 
 const initialState = {
   // Temporarily keep it local until learning how to load it asynchronous from our database.
-  ingredients: {
-    bacon : {
-      name : 'Bacon',
-      price : 1,
-      quantity: 0
-    },
-    cheese : {
-      name : 'Cheese',
-      price : 0.8,
-      quantity: 0
-    },
-    meat : {
-      name : 'Meat',
-      price : 1.3,
-      quantity: 0
-    },
-    salad : {
-      name : 'Salad',
-      price : 0.5,
-      quantity: 0
-    }
-  },
-  totalPrice: BASE_BURGER_PRICE
+  ingredients: null,
+  totalPrice: BASE_BURGER_PRICE,
+  error: false
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_INGREDIENT: {
+    case actionTypes.INIT_INGREDIENTS:
+      return {
+        ...state,
+        ingredients: action.ingredients,
+        error: false
+      }
+    case actionTypes.INIT_INGREDIENTS_FAILED:
+      return {
+        ...state,
+        error: true
+      }
+    case actionTypes.ADD_INGREDIENT: {
       const updatedIngredients = {
         ...state.ingredients,
         [action.ingredient]: {
@@ -44,7 +35,7 @@ const reducer = (state = initialState, action) => {
         totalPrice: state.totalPrice + state.ingredients[action.ingredient].price
       }
     }
-    case REMOVE_INGREDIENT: {
+    case actionTypes.REMOVE_INGREDIENT: {
       const updatedIngredients = {
         ...state.ingredients,
         [action.ingredient]: {
