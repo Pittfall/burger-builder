@@ -14,7 +14,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         ingredients: action.ingredients,
-        error: false
+        error: false,
+        totalPrice: BASE_BURGER_PRICE
       }
     case actionTypes.INIT_INGREDIENTS_FAILED:
       return {
