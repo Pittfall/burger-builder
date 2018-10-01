@@ -1,5 +1,45 @@
 import * as actionTypes from './actionTypes';
-import { SaveOrder } from '../../Http/API/API';
+import { SaveOrder, GetOrders } from '../../Http/API/API';
+
+export const initOrders = () => {
+   return dispatch => {
+        dispatch(initOrdersStart());
+        GetOrders()
+            .then (response => {
+                const orders = [];
+                for (let key in response.data) {
+                    orders.push( {
+                        ...response.data[key],
+                        id: key
+                    });
+                }
+                dispatch(initOrdersSuccess(orders));
+            })
+            .catch (error => {
+                dispatch(initOrdersFailed(error));
+            });
+   }
+}
+
+const initOrdersStart = () => {
+    return {
+        type: actionTypes.INIT_ORDERS_START
+    }
+}
+
+const initOrdersSuccess = (orders) => {
+    return {
+        type: actionTypes.INIT_ORDERS_SUCCESS,
+        orders: orders
+    }
+}
+
+const initOrdersFailed = (error) => {
+    return {
+        type: actionTypes.INIT_ORDERS_FAILED,
+        error: error
+    }
+}
 
 export const purchaseInit = () => {
    return {

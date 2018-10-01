@@ -1,33 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Order from '../../components/Order/Order';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './Orders.css';
-
-import { GetOrders } from '../../Http/API/API';
+import { initOrders } from '../../store/actions/order';
 
 class Orders extends Component {
-    state = {
-        orders: null
-    }
-
     componentDidMount () {
-        GetOrders()
-        .then (response => {
-            this.setState({orders: response.data});
-        })
-        .catch (error => {
-            alert(error);
-        });
+        this.props.onInitOrders();
     }
 
     render () {
         let userOrders = <Spinner />
 
-        if (this.state.orders) {
-            userOrders = Object.keys(this.state.orders).map(key => {
+        if (!this.props.loading) {
+            userOrders = this.props.orders.map(order => {
                 return (
-                    <Order key={key} orderData={this.state.orders[key]} />
+                    <Order key={order.id} orderData={order} />
                 );
             });
         }
@@ -40,4 +30,17 @@ class Orders extends Component {
     }
 }
 
-export default Orders;
+const mapStateToProps = state => {
+    return {
+        orders: state.orderReducer.orders,
+        loading: state.orderReducer.loading
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onInitOrders: () => dispatch(initOrders())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);
