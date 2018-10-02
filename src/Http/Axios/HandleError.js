@@ -1,5 +1,5 @@
 const handleError = (error) => {
-    const { status, message } = error;
+    const { status, response } = error;
 
     switch (status) {
       case 401:
@@ -16,7 +16,7 @@ const handleError = (error) => {
         // handle normal errors with some alert or whatever
     }
 
-    return message;
+    return response;
   }
 
   export default handleError;

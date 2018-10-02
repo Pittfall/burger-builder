@@ -1,8 +1,6 @@
 import axios from 'axios';
 import HandleError from './HandleError';
-import { BASE_URL, HTTP_HEADERS } from './Config';
-
-axios.defaults.baseURL = BASE_URL;
+import { HTTP_HEADERS } from './Config';
 
 // Don't need to set these this time.
 axios.defaults.headers.common['Accept'] = HTTP_HEADERS.ACCEPT;
