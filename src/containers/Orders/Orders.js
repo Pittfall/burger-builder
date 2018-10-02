@@ -15,11 +15,15 @@ class Orders extends Component {
         let userOrders = <Spinner />
 
         if (!this.props.loading) {
-            userOrders = this.props.orders.map(order => {
-                return (
-                    <Order key={order.id} orderData={order} />
-                );
-            });
+            if (this.props.error) {
+                userOrders = <p>{this.props.error}</p>
+            } else {
+                userOrders = this.props.orders.map(order => {
+                    return (
+                        <Order key={order.id} orderData={order} />
+                    );
+                });
+            }
         }
 
         return (
@@ -33,7 +37,8 @@ class Orders extends Component {
 const mapStateToProps = state => {
     return {
         orders: state.orderReducer.orders,
-        loading: state.orderReducer.loading
+        loading: state.orderReducer.loading,
+        error: state.orderReducer.error
     }
 }
 

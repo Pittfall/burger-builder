@@ -10,7 +10,7 @@ export const signUp = (email, password) => {
          })
          .catch(error => {
             console.log(error);
-            dispatch(authFail(error));
+            dispatch(authFail(error.data.error));
          });
    };
 };
@@ -20,14 +20,30 @@ export const signIn = (email, password) => {
       dispatch(authStart());
       SignInUser({email: email, password: password, returnSecureToken: true})
          .then(response => {
+            console.log(response.data);
+            dispatch(checkAuthTimeout(response.data.expiresIn));
             dispatch(authSuccess(response.data));
          })
          .catch(error => {
             console.log(error);
-            dispatch(authFail(error));
+            dispatch(authFail(error.data.error));
          });
    };
 };
+
+export const logout = () => {
+   return {
+      type: actionTypes.AUTH_LOGOUT
+   };
+};
+
+const checkAuthTimeout = (expirationTime) => {
+   return dispatch => {
+      setTimeout(() => {
+         dispatch(logout());
+      }, expirationTime * 1000);
+   }
+}
 
 const authStart = () => {
    return {
@@ -38,7 +54,8 @@ const authStart = () => {
 const authSuccess = (authData) => {
    return {
       type: actionTypes.AUTH_SUCCESS,
-      authData: authData
+      token: authData.idToken,
+      userId: authData.localId
    };
 };
 

@@ -16,7 +16,7 @@ export const initOrders = () => {
                 dispatch(initOrdersSuccess(orders));
             })
             .catch (error => {
-                dispatch(initOrdersFailed(error));
+                dispatch(initOrdersFailed(error.data.error));
             });
    }
 }
@@ -76,7 +76,7 @@ export const purchaseBurger = (orderData) => {
            dispatch(purchaseBurgerSuccess(response.data.name, orderData));
         })
         .catch(error => {
-           dispatch(purchaseBurgerFail(error));
+           dispatch(purchaseBurgerFail(error.data.error));
         });
    }
 }
