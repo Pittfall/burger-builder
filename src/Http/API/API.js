@@ -4,12 +4,12 @@ export const GetIngredients = () => {
     return get('https://react-my-burger-42e0f.firebaseio.com/ingredients.json')
 }
 
-export const GetOrders = () => {
-    return get('https://react-my-burger-42e0f.firebaseio.com/orders.json');
+export const GetOrders = (token) => {
+    return get('https://react-my-burger-42e0f.firebaseio.com/orders.json?auth=' + token);
 }
 
-export const SaveOrder = order => {
-    return post('https://react-my-burger-42e0f.firebaseio.com/orders.json', order);
+export const SaveOrder = (token, order) => {
+    return post('https://react-my-burger-42e0f.firebaseio.com/orders.json?auth=' + token, order);
 }
 
 export const SignUpNewUser = authData => {

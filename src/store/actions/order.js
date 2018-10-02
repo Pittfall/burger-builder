@@ -1,10 +1,10 @@
 import * as actionTypes from './actionTypes';
 import { SaveOrder, GetOrders } from '../../Http/API/API';
 
-export const initOrders = () => {
+export const initOrders = (token) => {
    return dispatch => {
         dispatch(initOrdersStart());
-        GetOrders()
+        GetOrders(token)
             .then (response => {
                 const orders = [];
                 for (let key in response.data) {
@@ -68,10 +68,10 @@ const purchaseBurgerStart = () => {
    }
 }
 
-export const purchaseBurger = (orderData) => {
+export const purchaseBurger = (token, orderData) => {
    return dispatch => {
       dispatch(purchaseBurgerStart());
-      SaveOrder(orderData)
+      SaveOrder(token, orderData)
         .then(response => {
            dispatch(purchaseBurgerSuccess(response.data.name, orderData));
         })

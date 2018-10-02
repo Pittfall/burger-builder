@@ -8,7 +8,7 @@ import { initOrders } from '../../store/actions/order';
 
 class Orders extends Component {
     componentDidMount () {
-        this.props.onInitOrders();
+        this.props.onInitOrders(this.props.token);
     }
 
     render () {
@@ -38,13 +38,14 @@ const mapStateToProps = state => {
     return {
         orders: state.orderReducer.orders,
         loading: state.orderReducer.loading,
-        error: state.orderReducer.error
+        error: state.orderReducer.error,
+        token: state.authReducer.token
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onInitOrders: () => dispatch(initOrders())
+        onInitOrders: (token) => dispatch(initOrders(token))
     }
 }
 
