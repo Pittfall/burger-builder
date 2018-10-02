@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { FIELDS } from './Fields/fields';
-import { checkValidity } from './Fields/validation';
+import { FIELDS } from '../../../Forms/contactData';
+import { checkValidity } from '../../../Forms/Utilities/utilities';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
