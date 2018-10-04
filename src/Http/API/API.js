@@ -4,8 +4,9 @@ export const GetIngredients = () => {
     return get('https://react-my-burger-42e0f.firebaseio.com/ingredients.json')
 }
 
-export const GetOrders = (token) => {
-    return get('https://react-my-burger-42e0f.firebaseio.com/orders.json?auth=' + token);
+export const GetOrders = (token, userId) => {
+   const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
+   return get('https://react-my-burger-42e0f.firebaseio.com/orders.json' + queryParams);
 }
 
 export const SaveOrder = (token, order) => {

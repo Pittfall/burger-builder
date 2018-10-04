@@ -1,10 +1,10 @@
 import * as actionTypes from './actionTypes';
 import { SaveOrder, GetOrders } from '../../Http/API/API';
 
-export const initOrders = (token) => {
+export const initOrders = (token, userId) => {
    return dispatch => {
         dispatch(initOrdersStart());
-        GetOrders(token)
+        GetOrders(token, userId)
             .then (response => {
                 const orders = [];
                 for (let key in response.data) {
