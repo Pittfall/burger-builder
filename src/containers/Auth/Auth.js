@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import classes from './Auth.css'
 import { FIELDS } from '../../Forms/auth';
@@ -72,8 +73,14 @@ class Auth extends Component {
          );
       }
 
+      let authRedirect = null;
+      if (this.props.isAuth) {
+            authRedirect = <Redirect to="/"/>;
+      }
+
       return (
          <div className={classes.Auth}>
+            {authRedirect}
             {errorMessage}
             <form onSubmit={this.onSubmitHandler}>
                {formElements}
@@ -88,7 +95,8 @@ class Auth extends Component {
 const mapStateToProps = state => {
    return {
       loading: state.authReducer.loading,
-      error: state.authReducer.error
+      error: state.authReducer.error,
+      isAuth: state.authReducer.token !== null
    }
 }
 

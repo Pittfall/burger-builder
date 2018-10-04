@@ -8,6 +8,7 @@ import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
 import classes from './ContactData.css';
 import { purchaseBurger } from '../../../store/actions/order'
+import { clearIngredients } from '../../../store/actions/burgerBuilder'
 
 class ContactData extends Component {
   state = {
@@ -30,6 +31,7 @@ class ContactData extends Component {
     }
 
     this.props.onOrderBurger(this.props.token, order);
+    this.props.onClearIngredients();
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
@@ -96,7 +98,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onOrderBurger: (token, orderData) => dispatch(purchaseBurger(token, orderData))
+    onOrderBurger: (token, orderData) => dispatch(purchaseBurger(token, orderData)),
+    onClearIngredients: () => dispatch(clearIngredients())
   }
 }
 

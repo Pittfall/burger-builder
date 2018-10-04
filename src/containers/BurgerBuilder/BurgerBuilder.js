@@ -17,7 +17,9 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount () {
-        this.props.onInitIngredients()
+        if (!this.props.ingredients) {
+            this.props.onInitIngredients();
+        }
     }
 
     updatePurchasableState () {
@@ -28,11 +30,15 @@ class BurgerBuilder extends Component {
             return sum + el.quantity;
         }, 0);
 
-        return sum > 0;
+        return sum > 0 || !this.props.isAuth;
     }
 
     purchaseHandler () {
-        this.setState({purchasing: true});
+        if (this.props.isAuth) {
+            this.setState({purchasing: true});
+        } else {
+            this.props.history.push({ pathname: '/auth'});
+        }
     }
 
     purchaseCancelHandler = () => {
@@ -66,7 +72,8 @@ class BurgerBuilder extends Component {
                             ingredientRemoved={this.props.onRemoveIngredientHandler} 
                             disabled={disabledInfo}
                             purchasable={this.updatePurchasableState()}
-                            order={this.purchaseHandler.bind(this)} />
+                            order={this.purchaseHandler.bind(this)}
+                            isAuth={this.props.isAuth} />
                     </Fragment>
             );
 
@@ -92,7 +99,8 @@ const mapStateToProps = state => {
     return {
         ingredients: state.burgerBuilderReducer.ingredients,
         price: state.burgerBuilderReducer.totalPrice,
-        error: state.burgerBuilderReducer.error
+        error: state.burgerBuilderReducer.error,
+        isAuth: state.authReducer.token !== null
     }
 }
 

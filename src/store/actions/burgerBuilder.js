@@ -31,3 +31,9 @@ export const removeIngredient = ingredientName => {
       ingredient: ingredientName
    };
 };
+
+export const clearIngredients = () => {
+    return {
+        type: actionTypes.CLEAR_INGREDIENTS
+    };
+};
