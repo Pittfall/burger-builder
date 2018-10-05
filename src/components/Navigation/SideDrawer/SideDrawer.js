@@ -17,7 +17,7 @@ const sideDrawer = (props) => {
     return (
         <Fragment>
             <Backdrop show={props.opened} clicked={props.close} />
-            <div className={attachedClasses}>
+            <div className={attachedClasses} onClick={props.close}>
                 <div className={classes.Logo}>
                     <Logo />
                 </div>
