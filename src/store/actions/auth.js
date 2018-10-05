@@ -9,7 +9,6 @@ export const signUp = (email, password) => {
             dispatch(authSuccess(response.data));
          })
          .catch(error => {
-            console.log(error);
             dispatch(authFail(error.data.error));
          });
    };
@@ -20,7 +19,6 @@ export const signIn = (email, password) => {
       dispatch(authStart());
       SignInUser({email: email, password: password, returnSecureToken: true})
          .then(response => {
-            console.log(response.data);
             localStorage.setItem('token', response.data.idToken);
             const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
             localStorage.setItem('expirationDate', expirationDate);
@@ -29,7 +27,6 @@ export const signIn = (email, password) => {
             dispatch(authSuccess(response.data));
          })
          .catch(error => {
-            console.log(error);
             dispatch(authFail(error.data.error));
          });
    };
