@@ -10,7 +10,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import { initIngredients, addIngredient, removeIngredient } from '../../store/actions/burgerBuilder';
 import { purchaseInit } from '../../store/actions/order';
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
     state = {
         purchasable: false,
         purchasing: false
