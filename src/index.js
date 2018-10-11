@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 
 import burgerBuilderReducer from './store/reducers/burgerBuilder';
@@ -24,7 +23,7 @@ const reducers = combineReducers({
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk, sagaMiddleware)));
+const store = createStore(reducers, composeEnhancers(applyMiddleware(sagaMiddleware)));
 
 sagaMiddleware.run(watchAuth);
 sagaMiddleware.run(watchBurgerBuilder);
