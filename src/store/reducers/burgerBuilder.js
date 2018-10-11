@@ -10,7 +10,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.INIT_INGREDIENTS:
+    case actionTypes.INIT_INGREDIENTS_SUCCESS:
       return {
         ...state,
         ingredients: action.ingredients,

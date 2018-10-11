@@ -46,7 +46,7 @@ export function* signInSaga(action) {
    }
 }
 
-export function* authCheckStateSaga(action) {
+export function* authCheckStateSaga() {
    const token = yield localStorage.getItem('token');
 
    if (!token) {
