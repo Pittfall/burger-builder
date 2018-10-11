@@ -13,8 +13,15 @@ export const INIT_ORDERS_START = 'INIT_ORDERS_START';
 export const INIT_ORDERS_SUCCESS = 'INIT_ORDERS_SUCCESS';
 export const INIT_ORDERS_FAILED = 'INIT_ORDERS_FAILED';
 
+// Auth Action Creators
 export const AUTH_START = 'AUTH_START';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAIL = 'AUTH_FAIL';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+
+// Auth Sagas
+export const AUTH_SIGN_UP = 'AUTH_SIGN_UP';
+export const AUTH_SIGN_IN = 'AUTH_SIGN_IN';
+export const AUTH_CHECK_STATE = 'AUTH_CHECK_STATE';
 export const AUTH_INITIATE_LOGOUT = 'AUTH_INITIATE_LOGOUT';
+export const AUTH_CHECK_TIMEOUT = 'AUTH_CHECK_TIMEOUT';
