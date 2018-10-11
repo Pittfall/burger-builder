@@ -8,14 +8,18 @@ export const CLEAR_INGREDIENTS = "CLEAR_INGREDIENTS";
 // BurgerBuilder Sagas
 export const INIT_INGREDIENTS = 'INIT_INGREDIENTS'
 
-export const PURCHASE_INIT = 'PURCHASE_INIT';
+// Orders Action Creators
+export const PURCHASE_INIT = 'INIT_PURCHASE';
 export const PURCHASE_BURGER_START = 'PURCHASE_BURGER_START';
 export const PURCHASE_BURGER_SUCCESS = 'PURCHASE_BURGER_SUCCESS';
 export const PURCHASE_BURGER_FAIL = 'PURCHASE_BURGER_FAIL';
-
 export const INIT_ORDERS_START = 'INIT_ORDERS_START';
 export const INIT_ORDERS_SUCCESS = 'INIT_ORDERS_SUCCESS';
 export const INIT_ORDERS_FAILED = 'INIT_ORDERS_FAILED';
+
+// Orders Sagas
+export const INIT_ORDERS = 'INIT_ORDERS';
+export const PURCHASE_BURGER = 'PURCHASE_BURGER';
 
 // Auth Action Creators
 export const AUTH_START = 'AUTH_START';

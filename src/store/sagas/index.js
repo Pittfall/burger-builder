@@ -3,6 +3,7 @@ import { takeEvery } from 'redux-saga/effects'
 import * as actionTypes from '../actions/actionTypes';
 import { logoutSaga, checkAuthTimeoutSaga, signUpSaga, signInSaga, authCheckStateSaga } from './auth';
 import { initIngredientsSaga } from './burgerBuilder';
+import { initOrders, purchaseBurger } from './order';
 
 export function* watchAuth() {
    yield takeEvery(actionTypes.AUTH_INITIATE_LOGOUT, logoutSaga);
@@ -14,4 +15,9 @@ export function* watchAuth() {
 
 export function* watchBurgerBuilder() {
    yield takeEvery(actionTypes.INIT_INGREDIENTS, initIngredientsSaga);
+}
+
+export function* watchOrders() {
+   yield takeEvery(actionTypes.INIT_ORDERS, initOrders);
+   yield takeEvery(actionTypes.PURCHASE_BURGER, purchaseBurger);
 }
